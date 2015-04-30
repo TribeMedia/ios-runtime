@@ -31,6 +31,8 @@ MetaFile::MetaFile(void* fileStart)
     : file(fileStart)
     , globalTableSlotsCount(*(const MetaArrayCount*)this->file)
     , globalTableStart((MetaFileOffset*)((MetaArrayCount*)this->file + 1))
-    , heapStart((Byte*)(this->globalTableStart + this->globalTableSlotsCount)) {
+    , topLevelModulesCount(*(this->globalTableStart + this->globalTableSlotsCount))
+    , topLevelModulesTableStart((MetaFileOffset*)((MetaArrayCount*)(this->globalTableStart + this->globalTableSlotsCount) + 1))
+    , heapStart((Byte*)(this->topLevelModulesTableStart + this->topLevelModulesCount)) {
 }
 }

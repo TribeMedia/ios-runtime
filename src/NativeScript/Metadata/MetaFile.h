@@ -22,6 +22,8 @@ private:
     const void* file;
     MetaArrayCount globalTableSlotsCount;
     MetaFileOffset* globalTableStart;
+    MetaArrayCount topLevelModulesCount;
+    MetaFileOffset* topLevelModulesTableStart;
     Byte* heapStart;
 
 public:
@@ -38,6 +40,14 @@ public:
 
     UInt32 getGlobalTableSlotsCount() const {
         return globalTableSlotsCount;
+    }
+    
+    const MetaFileOffset* goToModulesTable(UInt32 index) const {
+        return topLevelModulesTableStart + index;
+    }
+    
+    UInt32 getModulesTableCount() const {
+        return topLevelModulesCount;
     }
 };
 }
